@@ -1,92 +1,40 @@
 package com.ridelink.ride_service.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 @Document(collection = "rides")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Ride {
 
     @Id
     private String id;
 
     private String passengerId;
-
     private String driverId;
-
     private String pickupLocation;
-
     private String destination;
-
     private RideStatus status;
-
     private Double estimatedFare;
-
     private Double finalFare;
+    private Double distanceKm;
+    private String cancellationReason;
+    private String paymentStatus;
 
-    public Ride() {
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getPassengerId() {
-        return passengerId;
-    }
-
-    public void setPassengerId(String passengerId) {
-        this.passengerId = passengerId;
-    }
-
-    public String getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(String driverId) {
-        this.driverId = driverId;
-    }
-
-    public String getPickupLocation() {
-        return pickupLocation;
-    }
-
-    public void setPickupLocation(String pickupLocation) {
-        this.pickupLocation = pickupLocation;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public RideStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(RideStatus status) {
-        this.status = status;
-    }
-
-    public Double getEstimatedFare() {
-        return estimatedFare;
-    }
-
-    public void setEstimatedFare(Double estimatedFare) {
-        this.estimatedFare = estimatedFare;
-    }
-
-    public Double getFinalFare() {
-        return finalFare;
-    }
-
-    public void setFinalFare(Double finalFare) {
-        this.finalFare = finalFare;
-    }
+    private LocalDateTime requestedAt;
+    private LocalDateTime acceptedAt;
+    private LocalDateTime startedAt;
+    private LocalDateTime completedAt;
+    private LocalDateTime cancelledAt;
 }
