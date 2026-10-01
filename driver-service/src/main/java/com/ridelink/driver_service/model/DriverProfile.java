@@ -1,10 +1,21 @@
 package com.ridelink.driver_service.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.repository.MongoRepository;
+
+import java.time.LocalDateTime;
 
 @Document(collection = "driver_profiles")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class DriverProfile {
 
     @Id
@@ -17,62 +28,14 @@ public class DriverProfile {
     private Double currentLatitude;
     private Double currentLongitude;
 
-    public DriverProfile() {
-    }
+    @Builder.Default
+    private Double rating = 5.0;
 
-    public String getId() {
-        return id;
-    }
+    @Builder.Default
+    private Integer totalRides = 0;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    private String activeVehicleId;
 
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
-    public Availability getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Availability availability) {
-        this.availability = availability;
-    }
-
-    public String getServiceArea() {
-        return serviceArea;
-    }
-
-    public void setServiceArea(String serviceArea) {
-        this.serviceArea = serviceArea;
-    }
-
-    public Double getCurrentLatitude() {
-        return currentLatitude;
-    }
-
-    public void setCurrentLatitude(Double currentLatitude) {
-        this.currentLatitude = currentLatitude;
-    }
-
-    public Double getCurrentLongitude() {
-        return currentLongitude;
-    }
-
-    public void setCurrentLongitude(Double currentLongitude) {
-        this.currentLongitude = currentLongitude;
-    }
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
