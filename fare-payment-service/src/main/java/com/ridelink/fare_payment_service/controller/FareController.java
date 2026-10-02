@@ -1,9 +1,7 @@
 package com.ridelink.fare_payment_service.controller;
 
-import com.ridelink.fare_payment_service.dto.FareDetailResponse;
 import com.ridelink.fare_payment_service.dto.FareEstimateRequest;
 import com.ridelink.fare_payment_service.dto.FareResponse;
-import com.ridelink.fare_payment_service.dto.FinalFareRequest;
 import com.ridelink.fare_payment_service.service.FareService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,27 +18,14 @@ public class FareController {
         this.fareService = fareService;
     }
 
-    // POST /api/fares/estimate — Calculate initial estimated fare
     @PostMapping("/estimate")
-    public ResponseEntity<FareResponse> estimateFare(@Valid @RequestBody FareEstimateRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(fareService.calculateFare(request));
-    }
+    public ResponseEntity<FareResponse> estimateFare(
+            @Valid @RequestBody FareEstimateRequest request) {
 
-    // POST /api/fares/final — Calculate actual final fare upon ride completion
-    @PostMapping("/final")
-    public ResponseEntity<FareDetailResponse> calculateFinalFare(@Valid @RequestBody FinalFareRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(fareService.calculateFinalFare(request));
-    }
+        FareResponse response = fareService.calculateFare(request);
 
-    // GET /api/fares/ride/{rideId} — Get fare record for a ride
-    @GetMapping("/ride/{rideId}")
-    public ResponseEntity<FareDetailResponse> getFareByRideId(@PathVariable String rideId) {
-        return ResponseEntity.ok(fareService.getFareByRideId(rideId));
-    }
-
-    // GET /api/fares/{id} — Get fare record by ID
-    @GetMapping("/{id}")
-    public ResponseEntity<FareDetailResponse> getFareById(@PathVariable String id) {
-        return ResponseEntity.ok(fareService.getFareById(id));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
     }
 }
