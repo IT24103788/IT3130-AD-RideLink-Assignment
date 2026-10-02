@@ -3,7 +3,6 @@ package com.ridelink.account_service.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -15,9 +14,10 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    // Using a simple hardcoded key for demonstration. In production, use environment variables.
+    // Using a simple hardcoded key for demonstration. In production, use
+    // environment variables.
     private final String secret = "mySecretKeyShouldBeLongEnoughToMeetThe256BitRequirementForHS256AlgorithmRideLink";
-    
+
     private final long jwtExpirationMs = 86400000; // 24 hours
 
     private SecretKey getSigningKey() {
@@ -44,7 +44,7 @@ public class JwtUtil {
     public String extractEmail(String token) {
         return extractClaim(token, Claims::getSubject);
     }
-    
+
     public String extractRole(String token) {
         Claims claims = extractAllClaims(token);
         return claims.get("role", String.class);
