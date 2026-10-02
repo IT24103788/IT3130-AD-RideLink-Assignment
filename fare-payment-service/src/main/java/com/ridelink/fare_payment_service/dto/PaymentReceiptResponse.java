@@ -1,36 +1,32 @@
-package com.ridelink.fare_payment_service.model;
+package com.ridelink.fare_payment_service.dto;
 
+import com.ridelink.fare_payment_service.model.PaymentMethod;
+import com.ridelink.fare_payment_service.model.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document(collection = "payments")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Payment {
+public class PaymentReceiptResponse {
 
-    @Id
-    private String id;
-
+    private String receiptNumber;
+    private String paymentId;
     private String rideId;
     private String passengerId;
     private String driverId;
-    private double amount;
+    private double totalAmount;
     private String currency;
     private PaymentMethod paymentMethod;
-    private PaymentStatus status;
+    private PaymentStatus paymentStatus;
     private String transactionReference;
-    private String note;
-
-    private LocalDateTime createdAt;
-    private LocalDateTime completedAt;
+    private FareDetailResponse fareBreakdown;
+    private LocalDateTime issuedAt;
 }

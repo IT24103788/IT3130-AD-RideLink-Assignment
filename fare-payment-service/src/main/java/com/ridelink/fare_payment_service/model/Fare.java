@@ -22,20 +22,28 @@ public class Fare {
     private String id;
 
     private String rideId;
-
     private double distanceKm;
-
     private double durationMinutes;
-
     private double baseFare;
-
     private double distanceCharge;
-
     private double timeCharge;
+
+    @Builder.Default
+    private double surgeMultiplier = 1.0;
+
+    @Builder.Default
+    private double tollCharges = 0.0;
+
+    @Builder.Default
+    private double discountAmount = 0.0;
 
     private double totalFare;
 
-    private String currency;
+    @Builder.Default
+    private String currency = "LKR";
+
+    @Builder.Default
+    private String fareType = "ESTIMATE"; // "ESTIMATE" or "FINAL"
 
     private LocalDateTime calculatedAt;
 }
