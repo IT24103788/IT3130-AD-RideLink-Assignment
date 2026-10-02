@@ -31,7 +31,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtil.validateToken(jwt)) {
-                String email = jwtUtil.extractEmail(jwt);
                 String role = jwtUtil.extractRole(jwt);
                 String userId = jwtUtil.extractUserId(jwt);
 
